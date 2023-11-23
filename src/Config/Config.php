@@ -4,7 +4,7 @@ namespace Nicolas\ProjectManager\Config;
 
 class Config
 {
-    const DBNAME = "formation";
+    const DBNAME = "project_manager";
     const DBHOST = 'localhost';
     const DBUSER = 'test';
     const DBPWD = '1234';

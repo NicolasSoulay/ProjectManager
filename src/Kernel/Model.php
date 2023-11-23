@@ -22,7 +22,7 @@ class Model extends PDO
         }
     }
 
-    public static function getInstance()
+    public static function getInstance(): Model
     {
         if (self::$instance === null) {
             self::$instance = new static();
@@ -30,7 +30,7 @@ class Model extends PDO
         return self::$instance;
     }
 
-    public function readAll($entity)
+    public function readAll($entity): array|bool
     {
         $query = $this->query('select * from ' . $entity);
         return $query->fetchAll(PDO::FETCH_CLASS, Config::ENTITY . ucfirst($entity));
@@ -42,14 +42,14 @@ class Model extends PDO
         return $query->fetchAll(PDO::FETCH_CLASS, Config::ENTITY . ucfirst($entity))[0];
     }
 
-    public function getByAttribute($entity, $attribute, $value, $comp = '=')
+    public function getByAttribute($entity, $attribute, $value, $comp = '='): array|bool
     {
         // SELECT * FROM table WHERE attribute = value
         $query = $this->query("SELECT * FROM $entity WHERE $attribute $comp '$value'");
         return $query->fetchAll(PDO::FETCH_CLASS, Config::ENTITY . ucfirst($entity));
     }
 
-    public function save($entity, $datas)
+    public function save($entity, $datas): void
     {
         $sql = 'INSERT into ' . $entity . ' (';
         $count = count($datas) - 1;
@@ -79,7 +79,7 @@ class Model extends PDO
         $preparedRequest->execute($preparedDatas);
     }
 
-    public function updateById($entity, $id, $datas)
+    public function updateById($entity, $id, $datas): Model
     {
         $sql = 'UPDATE ' . $entity . ' SET ';
         $count = count($datas) - 1;
@@ -98,17 +98,20 @@ class Model extends PDO
         // var_dump($preparedDatas);
         $preparedRequest = $this->prepare($sql);
         $preparedRequest->execute($preparedDatas);
+        return self::$instance;
     }
 
-    public function deleteById($entity, $id)
+    public function deleteById($entity, $id): Model
     {
         $sql = "DELETE from $entity WHERE id = '$id'";
         $this->exec($sql);
+        return self::$instance;
     }
 
-    public function deleteByAttribute($entity, $attribute, $value)
+    public function deleteByAttribute($entity, $attribute, $value): Model
     {
         $sql = "DELETE from $entity WHERE" . $attribute . " = '$value'";
         $this->exec($sql);
+        return self::$instance;
     }
 }

@@ -6,8 +6,7 @@ use Nicolas\ProjectManager\Config\Config;
 
 class Dispatcher
 {
-
-    public static function Dispatch()
+    public static function Dispatch(): void
     {
         $c = false;
         $m = false;

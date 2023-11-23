@@ -1,5 +1,5 @@
 {
-    "name": "Nicolas/ProjectManager",
+    "name": "nicolas/projectmanager",
     "type": "project",
     "autoload": {
         "psr-4": {
