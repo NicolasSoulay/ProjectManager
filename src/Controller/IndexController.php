@@ -3,6 +3,7 @@
 namespace Nicolas\ProjectManager\Controller;
 
 use Nicolas\ProjectManager\Kernel\AbstractController;
+use Nicolas\ProjectManager\Kernel\View;
 
 class IndexController extends AbstractController
 {
@@ -11,6 +12,9 @@ class IndexController extends AbstractController
      */
     public function index(string $message = ''): void
     {
-        $this->render('index.php', ['message' => $message]);
+        $view = new View('index', 'Page de Test', ['message' => $message]);
+        $view->addCss(['bootstrap.min', 'main']);
+        $view->addJs(['bootstrap.min']);
+        $view->render();
     }
 }

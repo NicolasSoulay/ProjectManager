@@ -18,7 +18,7 @@ class AbstractRepository
         $this->entity = $entityName;
     }
 
-    public function getAll(): array | bool
+    public function getAll(): array
     {
         return Model::getInstance()->readAll($this->entity);
     }
@@ -28,9 +28,12 @@ class AbstractRepository
         return Model::getInstance()->getById($this->entity, $id);
     }
 
-    public function getByAttribute(string $attribute, string $value, string $comp = '='): array | bool
+    /**
+     * @param array<string,mixed> $attributes
+     */
+    public function getByAttribute(array $attributes): array
     {
-        return Model::getInstance()->getByAttribute($this->entity, $attribute, $value, $comp);
+        return Model::getInstance()->getByAttribute($this->entity, $attributes);
     }
 
     public function deleteById(int $id): Model

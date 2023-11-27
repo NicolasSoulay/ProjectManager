@@ -30,26 +30,43 @@ class Model extends PDO
         return self::$instance;
     }
 
-    public function readAll($entity): array|bool
+    public function readAll(string $entity): array
     {
         $query = $this->query('select * from ' . $entity);
         return $query->fetchAll(PDO::FETCH_CLASS, Config::ENTITY . ucfirst($entity));
     }
 
-    public function getById($entity, $id)
+    public function getById(string $entity, int $id): object
     {
         $query = $this->query('select * from ' . $entity . ' where id=' . $id);
         return $query->fetchAll(PDO::FETCH_CLASS, Config::ENTITY . ucfirst($entity))[0];
     }
-
-    public function getByAttribute($entity, $attribute, $value, $comp = '='): array|bool
+    /**
+     * @param array<string,mixed> $attributes
+     */
+    public function getByAttribute(string $entity, array $attributes): array
     {
         // SELECT * FROM table WHERE attribute = value
-        $query = $this->query("SELECT * FROM $entity WHERE $attribute $comp '$value'");
+        $count = count($attributes) - 1;
+        $i = 0;
+        $sql = "SELECT * FROM $entity WHERE ";
+        foreach ($attributes as $attribute => $value) {
+            $sql .= "$attribute = '$value'";
+            if ($i < $count) {
+                $sql .= ",";
+            }
+            $i++;
+        }
+
+        $query = $this->query($sql);
+
         return $query->fetchAll(PDO::FETCH_CLASS, Config::ENTITY . ucfirst($entity));
     }
 
-    public function save($entity, $datas): void
+    /**
+     * @param array<string,mixed> $datas
+     */
+    public function save(string $entity, array $datas): void
     {
         $sql = 'INSERT into ' . $entity . ' (';
         $count = count($datas) - 1;
@@ -79,7 +96,10 @@ class Model extends PDO
         $preparedRequest->execute($preparedDatas);
     }
 
-    public function updateById($entity, $id, $datas): Model
+    /**
+     * @param array<string,mixed> $datas
+     */
+    public function updateById(string $entity, int $id, array $datas): Model
     {
         $sql = 'UPDATE ' . $entity . ' SET ';
         $count = count($datas) - 1;
@@ -101,14 +121,14 @@ class Model extends PDO
         return self::$instance;
     }
 
-    public function deleteById($entity, $id): Model
+    public function deleteById(string $entity, int $id): Model
     {
         $sql = "DELETE from $entity WHERE id = '$id'";
         $this->exec($sql);
         return self::$instance;
     }
 
-    public function deleteByAttribute($entity, $attribute, $value): Model
+    public function deleteByAttribute(string $entity, string $attribute, mixed $value): Model
     {
         $sql = "DELETE from $entity WHERE" . $attribute . " = '$value'";
         $this->exec($sql);
