@@ -13,7 +13,6 @@ class AbstractRepository
 
         $positionRepository = strpos($arrayString[3], 'Repository');
         $entityName = substr($arrayString[3], 0, $positionRepository);
-        echo $entityName;
 
         $this->entity = $entityName;
     }
@@ -39,5 +38,13 @@ class AbstractRepository
     public function deleteById(int $id): Model
     {
         return Model::getInstance()->deleteById($this->entity, $id);
+    }
+
+    /**
+     * @param array<string,mixed> $datas
+     */
+    public function create(array $datas): Model
+    {
+        return Model::getInstance()->save($this->entity, $datas);
     }
 }

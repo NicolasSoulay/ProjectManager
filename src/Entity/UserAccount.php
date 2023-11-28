@@ -10,20 +10,6 @@ class UserAccount
     private string $firstName;
     private string $lastName;
 
-    public function __construct(
-        int $id,
-        string $email,
-        string $password,
-        string $firstName,
-        string $lastName
-    ) {
-        $this->id = $id;
-        $this->email = $email;
-        $this->password = $password;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-    }
-
     public function getId(): int
     {
         return $this->id;

@@ -22,4 +22,17 @@ class AbstractController
         }
         return $url;
     }
+
+    public function redirectIndex()
+    {
+        header('Location: http://127.0.0.1/ProjectManager');
+        exit();
+    }
+
+    public function redirect(string $controller, string $method, array|null $query = null)
+    {
+        $url = $this->generateUrl($controller, $method, $query);
+        header('Location: http://127.0.0.1/ProjectManager' . $url);
+        exit();
+    }
 }

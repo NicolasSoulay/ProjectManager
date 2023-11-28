@@ -6,17 +6,26 @@ class Security
 {
     public static function connectUser(string $email, string $password)
     {
-        $user = Model::getInstance()->getByAttribute('UserAccount', 'email', $email)[0];
+        $user = Model::getInstance()->getByAttribute('UserAccount', ['email' => $email]);
 
-        if (!empty($user)) {
+        if (empty($user)) {
             return "l'utilisateur $email n'existe pas";
         }
-        if (!password_verify($password, $user->getPassword())) {
+        if (!password_verify($password, $user[0]->getPassword())) {
             return "le mot de passe est incorrect";
         }
-        session_start();
+        if (session_status() != 2) {
+            session_start();
+        }
         $_SESSION['connected'] = true;
-        $_SESSION['connected_user'] = $user;
+        $_SESSION['connected_user'] = $user[0];
+        return "Bienvenue " . $user[0]->getFirstName() . " " . $user[0]->getLastName();
+    }
+
+    public static function disconnect()
+    {
+        session_unset();
+        session_destroy();
     }
 
     public static function isConnected(): bool
@@ -29,5 +38,13 @@ class Security
         }
         session_destroy();
         return false;
+    }
+
+    public static function isUsed(string $entity, string $attribute, string $value): bool
+    {
+        if (empty(Model::getInstance()->getByAttribute($entity, [$attribute => $value]))) {
+            return false;
+        }
+        return true;
     }
 }

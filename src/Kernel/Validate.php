@@ -30,21 +30,22 @@ abstract class Validate
 
     public static function validatePassword(string $password, string $password_confirmation, int $password_length = 8, bool $uppercase = true, bool $digit = true): string
     {
+        $message = '';
         if ($password === '') {
             return  "Le mot de passe est vide";
         }
         if (strlen($password) < $password_length) {
-            return "Le mot de passe doit au moins contenir $password_length caractères";
+            $message .= "Le mot de passe doit au moins contenir $password_length caractères<br>";
         }
-        if ($uppercase && !preg_match("/^[A-Z]+$/", $password)) {
-            return "Le mot de passe doit au moins contenir une lettre majuscule";
+        if ($uppercase && preg_match('/[A-Z]/', $password) === 0) {
+            $message .= "Le mot de passe doit au moins contenir une lettre majuscule<br>";
         }
-        if ($digit && !preg_match("/^[0-9]+$/", $password)) {
-            return "Le mot de passe doit au moins contenir un chiffre";
+        if ($digit && preg_match("/[0-9]/", $password) === 0) {
+            $message .= "Le mot de passe doit au moins contenir un chiffre<br>";
         }
         if ($password !== $password_confirmation) {
-            return "Les mots de passes ne correspondent pas";
+            $message .= "Les mots de passes ne correspondent pas<br>";
         }
-        return '';
+        return $message;
     }
 }

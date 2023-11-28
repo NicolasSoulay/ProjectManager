@@ -2,18 +2,33 @@
 
 namespace Nicolas\ProjectManager\Controller;
 
+use Nicolas\ProjectManager\Form\UserForm;
 use Nicolas\ProjectManager\Kernel\AbstractController;
+use Nicolas\ProjectManager\Kernel\Security;
 use Nicolas\ProjectManager\Kernel\View;
 
 class IndexController extends AbstractController
 {
-    /**
-     * @param string $message
-     */
-    public function index(string $message = ''): void
+    public function index(): void
     {
-        $view = new View('index', 'Page de Test', ['message' => $message]);
-        $view->addCss(['bootstrap.min', 'main']);
+        $message = '';
+        if (isset($_POST['submit']) && $_POST['submit'] === 'login') {
+            $message = Security::connectUser($_POST['email'], $_POST['password']);
+        }
+        if (Security::isConnected()) {
+            $view = new View('index', 'Project Manager', [
+                'message' => $message
+            ]);
+            $view->addCss(['bootstrap.min']);
+            $view->addJs(['bootstrap.min']);
+            $view->render();
+            return;
+        }
+        $view = new View('login', 'Connection', [
+            'message' => $message,
+            'form' => UserForm::createForm("login")
+        ]);
+        $view->addCss(['bootstrap.min']);
         $view->addJs(['bootstrap.min']);
         $view->render();
     }

@@ -66,7 +66,7 @@ class Model extends PDO
     /**
      * @param array<string,mixed> $datas
      */
-    public function save(string $entity, array $datas): void
+    public function save(string $entity, array $datas): Model
     {
         $sql = 'INSERT into ' . $entity . ' (';
         $count = count($datas) - 1;
@@ -94,6 +94,7 @@ class Model extends PDO
         // var_dump($preparedDatas);
         $preparedRequest = $this->prepare($sql);
         $preparedRequest->execute($preparedDatas);
+        return self::$instance;
     }
 
     /**

@@ -11,22 +11,6 @@ class Task
     private int $id_project;
     private int $id_user;
 
-    public function __construct(
-        int $id,
-        string $name,
-        int $id_lifeCycle,
-        int $id_priority,
-        int $id_project,
-        int $id_user
-    ) {
-        $this->id = $id;
-        $this->name = $name;
-        $this->id_lifeCycle = $id_lifeCycle;
-        $this->id_priority = $id_priority;
-        $this->id_project = $id_project;
-        $this->id_user = $id_user;
-    }
-
     public function getId(): int
     {
         return $this->id;

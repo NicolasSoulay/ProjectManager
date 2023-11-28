@@ -8,13 +8,6 @@ class Project
     private string $name;
     private int $id_admin;
 
-    public function __construct(int $id, string $name, int $id_admin)
-    {
-        $this->id = $id;
-        $this->name = $name;
-        $this->id_admin = $id_admin;
-    }
-
     public function getId(): int
     {
         return $this->id;
