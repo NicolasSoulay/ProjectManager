@@ -17,7 +17,7 @@ class IndexController extends AbstractController
         }
         if (Security::isConnected()) {
             $view = new View('index', 'Project Manager', [
-                'message' => $message
+                'message' => $message,
             ]);
             $view->addCss(['bootstrap.min']);
             $view->addJs(['bootstrap.min']);
@@ -26,7 +26,8 @@ class IndexController extends AbstractController
         }
         $view = new View('login', 'Connection', [
             'message' => $message,
-            'form' => UserForm::createForm("login")
+            'form' => UserForm::createForm("login"),
+            'nav_off' => true,
         ]);
         $view->addCss(['bootstrap.min']);
         $view->addJs(['bootstrap.min']);

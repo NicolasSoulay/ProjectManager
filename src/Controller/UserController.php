@@ -39,10 +39,19 @@ class UserController extends AbstractController
                 $message = "L'utilisateur a bien été crée";
             }
         }
-        $view = new View('form', 'Créer un compte', [
-            'form' => UserForm::createForm('create'),
-            'message' => $message,
-        ]);
+        if (!Security::isConnected() && $message === "L'utilisateur a bien été crée") {
+            $view = new View('login', 'Connection', [
+                'message' => $message,
+                'form' => UserForm::createForm("login"),
+                'nav_off' => true,
+            ]);
+        } else {
+            $view = new View('form', 'Créer un compte', [
+                'form' => UserForm::createForm('create'),
+                'message' => $message,
+                'nav_off' => true,
+            ]);
+        }
         $view->addCss(['bootstrap.min']);
         $view->addJs(['bootstrap.min']);
         $view->render();

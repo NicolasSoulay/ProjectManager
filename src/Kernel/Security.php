@@ -21,10 +21,12 @@ class Security
         $_SESSION['connected_user'] = $user[0];
         return "Bienvenue " . $user[0]->getFirstName() . " " . $user[0]->getLastName();
     }
-
-    public static function disconnect()
+    // TODO : refaire les methodes disconnect et isConnected
+    public static function disconnect(): void
     {
-        session_unset();
+        if (session_status() != 2) {
+            session_start();
+        }
         session_destroy();
     }
 
