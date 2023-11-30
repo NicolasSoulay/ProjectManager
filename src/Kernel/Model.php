@@ -36,10 +36,10 @@ class Model extends PDO
         return $query->fetchAll(PDO::FETCH_CLASS, Config::ENTITY . ucfirst($entity));
     }
 
-    public function getById(string $entity, int $id): object
+    public function getById(string $entity, int $id): array
     {
         $query = $this->query('select * from ' . $entity . ' where id=' . $id);
-        return $query->fetchAll(PDO::FETCH_CLASS, Config::ENTITY . ucfirst($entity))[0];
+        return $query->fetchAll(PDO::FETCH_CLASS, Config::ENTITY . ucfirst($entity));
     }
     /**
      * @param array<string,mixed> $attributes
@@ -136,9 +136,15 @@ class Model extends PDO
         return self::$instance;
     }
 
-    public function customQueryGet(string $sql, string $entity)
+    public function customQueryGet(string $sql, string $entity): array
     {
         $query = $this->query($sql);
         return $query->fetchAll(PDO::FETCH_CLASS, Config::ENTITY . ucfirst($entity));
+    }
+
+    public function customQueryCount(string $sql): int
+    {
+        $query = $this->query($sql);
+        return $query->fetchColumn();
     }
 }

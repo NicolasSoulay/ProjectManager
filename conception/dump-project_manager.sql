@@ -63,7 +63,7 @@ CREATE TABLE `Participate` (
 
 LOCK TABLES `Participate` WRITE;
 /*!40000 ALTER TABLE `Participate` DISABLE KEYS */;
-INSERT INTO `Participate` VALUES (2,6),(3,6);
+INSERT INTO `Participate` VALUES (2,6),(3,6),(5,6);
 /*!40000 ALTER TABLE `Participate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,7 +104,7 @@ CREATE TABLE `Project` (
   PRIMARY KEY (`id`),
   KEY `id_User` (`id_admin`),
   CONSTRAINT `Project_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `UserAccount` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,7 +113,7 @@ CREATE TABLE `Project` (
 
 LOCK TABLES `Project` WRITE;
 /*!40000 ALTER TABLE `Project` DISABLE KEYS */;
-INSERT INTO `Project` VALUES (1,'Le Projet de Pepito',6),(2,'Le Projet de Robert',10),(3,'Le Projet de Jean-Michel',8),(4,'Le deuxieme Projet de Pepito',6);
+INSERT INTO `Project` VALUES (1,'Le Projet de Pepito',6),(2,'Le Projet de Robert',10),(3,'Le Projet de Jean-Michel',8),(4,'Le deuxieme Projet de Pepito',6),(5,'Le Projet de Boby',9),(6,'Le Projet de Toto',7);
 /*!40000 ALTER TABLE `Project` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -130,7 +130,7 @@ CREATE TABLE `Task` (
   `id_lifeCycle` int(11) NOT NULL,
   `id_priority` int(11) NOT NULL,
   `id_project` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `id_user` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_LifeCycle` (`id_lifeCycle`),
   KEY `id_Priority` (`id_priority`),
@@ -140,7 +140,7 @@ CREATE TABLE `Task` (
   CONSTRAINT `Task_ibfk_2` FOREIGN KEY (`id_priority`) REFERENCES `Priority` (`id`),
   CONSTRAINT `Task_ibfk_3` FOREIGN KEY (`id_project`) REFERENCES `Project` (`id`),
   CONSTRAINT `Task_ibfk_4` FOREIGN KEY (`id_user`) REFERENCES `UserAccount` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,6 +149,7 @@ CREATE TABLE `Task` (
 
 LOCK TABLES `Task` WRITE;
 /*!40000 ALTER TABLE `Task` DISABLE KEYS */;
+INSERT INTO `Task` VALUES (1,'Manger des gateaux',1,1,1,NULL),(2,'Renverser le capitalisme',2,3,1,NULL),(3,'Aller chez le coiffeur',3,5,1,NULL);
 /*!40000 ALTER TABLE `Task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,4 +194,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-30 14:18:13
+-- Dump completed on 2023-11-30 17:17:10

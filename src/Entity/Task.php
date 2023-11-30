@@ -9,7 +9,7 @@ class Task
     private int $id_lifeCycle;
     private int $id_priority;
     private int $id_project;
-    private int $id_user;
+    private ?int $id_user;
 
     public function getId(): int
     {

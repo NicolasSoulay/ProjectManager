@@ -22,9 +22,12 @@ class AbstractRepository
         return Model::getInstance()->readAll($this->entity);
     }
 
-    public function getById(int $id): object
+    public function getById(int $id): object|bool
     {
-        return Model::getInstance()->getById($this->entity, $id);
+        if (!empty($fetched_entity = Model::getInstance()->getById($this->entity, $id))) {
+            return $fetched_entity[0];
+        }
+        return false;
     }
 
     /**
@@ -51,5 +54,10 @@ class AbstractRepository
     public function customQueryGet(string $sql): array
     {
         return Model::getInstance()->customQueryGet($sql, $this->entity);
+    }
+
+    public function customQueryCount(string $sql): int
+    {
+        return Model::getInstance()->customQueryCount($sql);
     }
 }
