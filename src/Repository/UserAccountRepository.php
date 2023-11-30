@@ -10,4 +10,13 @@ class UserAccountRepository extends AbstractRepository
     {
         parent::__construct();
     }
+
+    // EXEMPLE :
+    public function getUserByFirstNameLastName(string $firstName, string $lastName): array
+    {
+        return $this->getByAttribute([
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+        ]);
+    }
 }
