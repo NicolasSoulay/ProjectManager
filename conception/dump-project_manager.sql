@@ -63,6 +63,7 @@ CREATE TABLE `Participate` (
 
 LOCK TABLES `Participate` WRITE;
 /*!40000 ALTER TABLE `Participate` DISABLE KEYS */;
+INSERT INTO `Participate` VALUES (2,6),(3,6);
 /*!40000 ALTER TABLE `Participate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,7 +104,7 @@ CREATE TABLE `Project` (
   PRIMARY KEY (`id`),
   KEY `id_User` (`id_admin`),
   CONSTRAINT `Project_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `UserAccount` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,6 +113,7 @@ CREATE TABLE `Project` (
 
 LOCK TABLES `Project` WRITE;
 /*!40000 ALTER TABLE `Project` DISABLE KEYS */;
+INSERT INTO `Project` VALUES (1,'Le Projet de Pepito',6),(2,'Le Projet de Robert',10),(3,'Le Projet de Jean-Michel',8),(4,'Le deuxieme Projet de Pepito',6);
 /*!40000 ALTER TABLE `Project` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,7 +167,7 @@ CREATE TABLE `UserAccount` (
   `lastName` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -174,7 +176,7 @@ CREATE TABLE `UserAccount` (
 
 LOCK TABLES `UserAccount` WRITE;
 /*!40000 ALTER TABLE `UserAccount` DISABLE KEYS */;
-INSERT INTO `UserAccount` VALUES (6,'pepito@pepito.com','$2y$10$mfOpuSRGjsGVx/FfVp2fluX1N66ZSHIN0nxziSRn3wiDihYstS1aS','Pepito','Machiato');
+INSERT INTO `UserAccount` VALUES (6,'pepito@pepito.com','$2y$10$mfOpuSRGjsGVx/FfVp2fluX1N66ZSHIN0nxziSRn3wiDihYstS1aS','Pepito','Machiato'),(7,'toto@toto.fr','$2y$10$hDLwB3yzxREnxoZe0uzDx.22N8CL8jJ3myz5lBFMwMvSBPWv9atdy','Toto','LeRigolo'),(8,'jm@jm.fr','$2y$10$KoFo1yThBGfjIf/29oZGvOZFd7Hxg/dSNRDkwklDOJwssCUAGPJoK','Jean-Michel','Developpeur'),(9,'boby@boby.fr','$2y$10$ISW78qDU8QpU6fWwGdSb5OEqxonVIauDSximZRcLarnGtiSR7t0nG','Boby','Lafrite'),(10,'robert@robert.fr','$2y$10$fiKufBgEJLkWudkTQY/AOes93EZVpRc/vwu34SqyJIRg6jQi/XY2C','Robert','Php'),(11,'pierre@pierre.fr','$2y$10$XTJWFdsLskyGm6XQmrnBPe9HfPiE/gvaYqToUdt1XSUEAX8AXBA0W','Pierre','Programming'),(12,'eric@eric.fr','$2y$10$Bvd9GbWl6DK829rVsS/GoengXnJYTze724WqLgIKN/P2ELgrxbM7q','Eric','Js');
 /*!40000 ALTER TABLE `UserAccount` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -191,4 +193,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-30 12:27:49
+-- Dump completed on 2023-11-30 14:18:13

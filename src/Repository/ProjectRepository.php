@@ -10,4 +10,10 @@ class ProjectRepository extends AbstractRepository
     {
         parent::__construct();
     }
+
+    public function getByParticipating(string $userId): array
+    {
+        $sql = "SELECT id, name, id_admin FROM Project JOIN Participate p ON p.id_project = Project.id WHERE id_user = $userId";
+        return $this->customQueryGet($sql);
+    }
 }

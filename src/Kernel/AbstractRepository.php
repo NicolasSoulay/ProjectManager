@@ -47,4 +47,9 @@ class AbstractRepository
     {
         return Model::getInstance()->save($this->entity, $datas);
     }
+
+    public function customQueryGet(string $sql): array
+    {
+        return Model::getInstance()->customQueryGet($sql, $this->entity);
+    }
 }

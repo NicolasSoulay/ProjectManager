@@ -135,4 +135,10 @@ class Model extends PDO
         $this->exec($sql);
         return self::$instance;
     }
+
+    public function customQueryGet(string $sql, string $entity)
+    {
+        $query = $this->query($sql);
+        return $query->fetchAll(PDO::FETCH_CLASS, Config::ENTITY . ucfirst($entity));
+    }
 }

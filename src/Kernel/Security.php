@@ -19,7 +19,7 @@ class Security
         }
         $_SESSION['connected'] = true;
         $_SESSION['connected_user'] = $user[0];
-        return "Bienvenue " . $user[0]->getFirstName() . " " . $user[0]->getLastName();
+        return '';
     }
     // TODO : refaire les methodes disconnect et isConnected
     public static function disconnect(): void
