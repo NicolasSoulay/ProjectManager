@@ -49,6 +49,7 @@ class TaskController extends AbstractController
         $view->render();
     }
 
+    // TODO : move isAdmin() and isParticipating() somewhere more appropriate
     private function isAdmin(UserAccount $user, Project $project): bool
     {
         if ($project->getId_admin() !== $user->getId()) {

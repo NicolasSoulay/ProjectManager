@@ -32,4 +32,8 @@ class Config
 
 ## TODO
 
-- Project Controller, Task Controller.
+- Complete CRUD on project
+- Complete CRUD on task
+- Create a User from the project page
+- Account management page
+- Style
