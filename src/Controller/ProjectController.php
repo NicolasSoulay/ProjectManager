@@ -25,7 +25,7 @@ class ProjectController extends AbstractController
         $user = $_SESSION['connected_user'];
         $message = 'Bienvenu ' . $user->getFirstName() . ' ' . $user->getLastName();
 
-        $view = new View('index', 'Project Manager', [
+        $view = new View('home', 'Project Manager', [
             'message' => $message,
             'user_projects' => $this->projectRepository->getByAttribute(['id_admin' => $user->getId()]),
             'projects' => $this->projectRepository->getByParticipating($user->getid()),
