@@ -10,7 +10,7 @@
                         <li class='nav-item'><a class='nav-link' href=''>li2</a></li>
                         <li class='nav-item'><a class='nav-link' href=''>li3</a></li>
                         <li class='nav-item'><a class='nav-link' href=''>li4</a></li>
-                        <li class='nav-item'><a class='nav-link' href='?controller=UserController&method=disconnectUser'>Déconnexion</a></li>
+                        <li class='nav-item'><a class='nav-link' href='?controller=UserController&method=disconnect'>Déconnexion</a></li>
                     </ul>
                 <?php endif ?>
             </div>

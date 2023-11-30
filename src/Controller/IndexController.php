@@ -19,16 +19,13 @@ class IndexController extends AbstractController
             $view = new View('index', 'Project Manager', [
                 'message' => $message,
             ]);
-            $view->addCss(['bootstrap.min']);
-            $view->addJs(['bootstrap.min']);
-            $view->render();
-            return;
+        } else {
+            $view = new View('login', 'Connection', [
+                'message' => $message,
+                'form' => UserForm::createForm("login"),
+                'nav_off' => true,
+            ]);
         }
-        $view = new View('login', 'Connection', [
-            'message' => $message,
-            'form' => UserForm::createForm("login"),
-            'nav_off' => true,
-        ]);
         $view->addCss(['bootstrap.min']);
         $view->addJs(['bootstrap.min']);
         $view->render();

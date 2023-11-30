@@ -2,10 +2,10 @@
 
 namespace Nicolas\ProjectManager\Controller;
 
+use Nicolas\ProjectManager\Form\FormValidator;
 use Nicolas\ProjectManager\Form\UserForm;
 use Nicolas\ProjectManager\Kernel\AbstractController;
 use Nicolas\ProjectManager\Kernel\Security;
-use Nicolas\ProjectManager\Kernel\Validate;
 use Nicolas\ProjectManager\Kernel\View;
 use Nicolas\ProjectManager\Repository\UserAccountRepository;
 
@@ -21,14 +21,10 @@ class UserController extends AbstractController
     public function createUser(): void
     {
         $message = '';
+
         if (isset($_POST['submit']) && $_POST['submit'] === 'createUser') {
-            $message .= Validate::validateName($_POST['firstName'], 'Le prénom est incorrect<br>', 'le champs "Prénom" est vide<br>');
-            $message .= Validate::validateName($_POST['lastName'], 'Le nom de famille est incorrect<br>', 'le champs "Nom de famille" est vide<br>');
-            $message .= Validate::validateEmail($_POST['email'], "L'email est incorrect<br>", 'le champs "Email" est vide<br>');
-            $message .= Validate::validatePassword($_POST['password'], $_POST['password_verify']);
-            if (Security::isUsed('UserAccount', 'email', $_POST['email'])) {
-                $message .= "L'adresse email est déja utilisé<br>";
-            }
+            $message = FormValidator::validateUserCreation();
+
             if ($message === '') {
                 $this->userAccountRepository->create([
                     'email' => $_POST['email'],
@@ -39,6 +35,7 @@ class UserController extends AbstractController
                 $message = "L'utilisateur a bien été crée";
             }
         }
+
         if (!Security::isConnected() && $message === "L'utilisateur a bien été crée") {
             $view = new View('login', 'Connection', [
                 'message' => $message,
@@ -52,11 +49,13 @@ class UserController extends AbstractController
                 'nav_off' => true,
             ]);
         }
+
         $view->addCss(['bootstrap.min']);
         $view->addJs(['bootstrap.min']);
         $view->render();
     }
-    public function disconnectUser(): void
+
+    public function disconnect(): void
     {
         Security::disconnect();
         $this->redirectIndex();
