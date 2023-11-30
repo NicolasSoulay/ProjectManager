@@ -2,7 +2,10 @@
 
 ## How to start 
 
-- clone this repository in your apache server (git clone https://github.com/NicolasSoulay/ProjectManager)
+- clone this repository in your apache server: 
+```bash
+git clone https://github.com/NicolasSoulay/ProjectManager
+```
 - go to the root file of the project, open the terminal and use the command: composer update
 - create a database, and use the .sql file inside /conception to restore it
 - modify the Config class to enable the connection to the database you just restored
