@@ -48,12 +48,12 @@ DROP TABLE IF EXISTS `Participate`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Participate` (
-  `id_Project` int(11) NOT NULL,
-  `id_User` int(11) NOT NULL,
-  PRIMARY KEY (`id_Project`,`id_User`),
-  KEY `id_User` (`id_User`),
-  CONSTRAINT `Participate_ibfk_1` FOREIGN KEY (`id_Project`) REFERENCES `Project` (`id`),
-  CONSTRAINT `Participate_ibfk_2` FOREIGN KEY (`id_User`) REFERENCES `UserAccount` (`id`)
+  `id_project` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  PRIMARY KEY (`id_project`,`id_user`),
+  KEY `id_User` (`id_user`),
+  CONSTRAINT `Participate_ibfk_1` FOREIGN KEY (`id_project`) REFERENCES `Project` (`id`),
+  CONSTRAINT `Participate_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `UserAccount` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -191,4 +191,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-30 11:09:24
+-- Dump completed on 2023-11-30 12:27:49
