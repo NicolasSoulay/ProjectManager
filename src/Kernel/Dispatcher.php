@@ -3,22 +3,23 @@
 namespace Nicolas\ProjectManager\Kernel;
 
 use Nicolas\ProjectManager\Config\Config;
+use Nicolas\ProjectManager\Config\Routes;
 
 class Dispatcher
 {
-    public static function Dispatch(): void
+    public static function dispatch(): void
     {
         $c = false;
         $m = false;
-        if (isset($_GET['controller']) && isset($_GET['method'])) {
-            if (class_exists(Config::CONTROLLER . $_GET['controller'])) {
-                $c = Config::CONTROLLER . $_GET['controller'];
+        foreach (Routes::ROUTES as $route => $variables) {
+            if (isset($_GET[$route])) {
+
+                $c = Config::CONTROLLER . $variables[0];
                 $controller = new $c();
-                if (method_exists($controller, $_GET['method'])) {
-                    $m = $_GET['method'];
-                    $controller->$m();
-                    return;
-                }
+
+                $m = $variables[1];
+                $controller->$m();
+                return;
             }
         }
         $c = Config::CONTROLLER . Config::DEFAULT_CONTROLLER;

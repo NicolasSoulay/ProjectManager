@@ -2,7 +2,7 @@
 
 namespace Nicolas\ProjectManager\Config;
 
-class Config
+abstract class Config
 {
     const DBNAME = "project_manager";
     const DBHOST = 'localhost';

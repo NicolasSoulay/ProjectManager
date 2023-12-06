@@ -23,11 +23,11 @@ class TaskController extends AbstractController
 
     public function index(): void
     {
-        if (!Security::isConnected() || !isset($_GET['project'])) {
+        if (!Security::isConnected() || !isset($_GET['Project'])) {
             $this->redirectIndex();
         }
 
-        $project = $this->projectRepository->getById($_GET['project']);
+        $project = $this->projectRepository->getById($_GET['Project']);
 
         if ($project === false) {
             $this->redirectIndex();
@@ -39,9 +39,31 @@ class TaskController extends AbstractController
             $this->redirectIndex();
         }
 
+        $unstarted = [];
+        $started = [];
+        $finished = [];
+
+        foreach ($this->taskRepository->getByProjectOrdered($project->getId()) as $task) {
+            if ($task->getId_lifeCycle() === 1) {
+                $unstarted[] = $task;
+                continue;
+            }
+            if ($task->getId_lifeCycle() === 2) {
+                $started[] = $task;
+                continue;
+            }
+            if ($task->getId_lifeCycle() === 3) {
+                $finished[] = $task;
+                continue;
+            }
+        }
+
         $view = new View('project', $project->getName(), [
             'message' => $message,
-            'tasks' => $this->taskRepository->getByAttribute(['id_project' => $project->getId()]),
+            'project' => $project,
+            'unstarted_tasks' => $unstarted,
+            'started_tasks' => $started,
+            'finished_tasks' => $finished,
         ]);
 
         $view->addCss(['bootstrap.min']);

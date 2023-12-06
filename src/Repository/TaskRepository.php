@@ -10,4 +10,10 @@ class TaskRepository extends AbstractRepository
     {
         parent::__construct();
     }
+
+    public function getByProjectOrdered(int $id_project): array
+    {
+        $sql = "SELECT * FROM Task WHERE id_project = $id_project ORDER BY id_priority ASC, name ASC";
+        return $this->customQueryGet($sql);
+    }
 }

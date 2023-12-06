@@ -53,11 +53,10 @@ class Model extends PDO
         foreach ($attributes as $attribute => $value) {
             $sql .= "$attribute = '$value'";
             if ($i < $count) {
-                $sql .= ",";
+                $sql .= " AND ";
             }
             $i++;
         }
-
         $query = $this->query($sql);
 
         return $query->fetchAll(PDO::FETCH_CLASS, Config::ENTITY . ucfirst($entity));

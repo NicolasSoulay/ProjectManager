@@ -16,7 +16,7 @@ class IndexController extends AbstractController
             $message = Security::connectUser($_POST['email'], $_POST['password']);
         }
         if (Security::isConnected()) {
-            $this->redirect('ProjectController', 'index');
+            $this->redirect('Home');
         } else {
             $view = new View('login', 'Connection', [
                 'message' => $message,

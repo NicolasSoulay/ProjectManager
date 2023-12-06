@@ -4,5 +4,5 @@ if (isset($form)) {
 }
 ?>
 <div class='d-flex justify-content-center mt-5'>
-    <a href='?controller=UserController&method=createUser'>Creer un compte</a>
+    <a href='?AccountCreation'>Creer un compte</a>
 </div>

@@ -12,9 +12,9 @@ class AbstractController
         }
     }
 
-    public function generateUrl(string $controller, string $method, array|null $query = null): string
+    public function generateUrl(string $route, array|null $query = null): string
     {
-        $url = "?controller=" . $controller . "&method=" . $method;
+        $url = "?" . $route;
         if (is_array($query) && count($query) > 0) {
             foreach ($query as $key => $value) {
                 $url .= "&" . $key . "=" . $value;
@@ -29,9 +29,9 @@ class AbstractController
         exit();
     }
 
-    public function redirect(string $controller, string $method, array|null $query = null)
+    public function redirect(string $route, array|null $query = null)
     {
-        $url = $this->generateUrl($controller, $method, $query);
+        $url = $this->generateUrl($route, $query);
         header('Location: http://127.0.0.1/ProjectManager' . $url);
         exit();
     }

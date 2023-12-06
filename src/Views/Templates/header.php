@@ -14,15 +14,15 @@
                     <li class='nav-item'><a class='nav-link text-light' href=''>lien 3</a></li>
                 </ul>
                 <ul class='col navbar-nav justify-content-end'>
-                    <li class='nav-item'><a class='nav-link text-light' href='?controller=UserController&method=userAccount'>Votre compte</a></li>
-                    <li class='nav-item'><a class='me-3 nav-link text-light' href='?controller=UserController&method=disconnect'>Déconnexion</a></li>
+                    <li class='nav-item'><a class='nav-link text-light' href=''>Votre compte</a></li>
+                    <li class='nav-item'><a class='me-3 nav-link text-light' href='?Disconnect'>Déconnexion</a></li>
                 </ul>
             <?php endif ?>
         </nav>
     </header>
-    <main class=''>
+    <main class='container'>
         <?php
         if (isset($message)) {
-            echo "<div class='d-flex justify-content-center'><p class='h5 my-5 text-danger'>" . $message . "</p></div>";
+            echo "<div class='d-flex justify-content-center'><p class='h5 my-4 text-danger'>" . $message . "</p></div>";
         }
         ?>
