@@ -36,7 +36,7 @@ CREATE TABLE `LifeCycle` (
 
 LOCK TABLES `LifeCycle` WRITE;
 /*!40000 ALTER TABLE `LifeCycle` DISABLE KEYS */;
-INSERT INTO `LifeCycle` VALUES (2,'en cours'),(1,'Non débuté'),(3,'terminé');
+INSERT INTO `LifeCycle` VALUES (2,'En cours'),(1,'Non débuté'),(3,'Terminé');
 /*!40000 ALTER TABLE `LifeCycle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +140,7 @@ CREATE TABLE `Task` (
   CONSTRAINT `Task_ibfk_2` FOREIGN KEY (`id_priority`) REFERENCES `Priority` (`id`),
   CONSTRAINT `Task_ibfk_3` FOREIGN KEY (`id_project`) REFERENCES `Project` (`id`),
   CONSTRAINT `Task_ibfk_4` FOREIGN KEY (`id_user`) REFERENCES `UserAccount` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +149,7 @@ CREATE TABLE `Task` (
 
 LOCK TABLES `Task` WRITE;
 /*!40000 ALTER TABLE `Task` DISABLE KEYS */;
-INSERT INTO `Task` VALUES (1,'Manger des gateaux',1,1,1,NULL),(2,'Renverser le capitalisme',2,3,1,NULL),(3,'Aller chez le coiffeur',3,5,1,NULL);
+INSERT INTO `Task` VALUES (1,'Manger des gateaux',1,1,1,NULL),(2,'Renverser le capitalisme',2,3,1,NULL),(3,'Aller chez le coiffeur',3,5,1,NULL),(30,'Faire de la guitare',1,2,1,NULL),(31,'Cuisiner la choucroute',2,2,1,NULL),(32,'Sacrifier un eleve',3,1,1,NULL),(33,'Partir en vacance',1,3,1,NULL),(34,'Vider les poubelles',3,4,1,NULL),(35,'Faire la vaisselle',2,1,1,NULL),(36,'Acheter un balais',2,5,1,NULL),(37,'Bruler prestashop',3,5,1,NULL),(38,'Conquerir le monde',3,2,1,NULL);
 /*!40000 ALTER TABLE `Task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -194,4 +194,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-30 17:17:10
+-- Dump completed on 2023-12-06 13:43:32
