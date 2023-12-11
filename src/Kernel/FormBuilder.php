@@ -23,7 +23,7 @@ class FormBuilder
         return $form;
     }
 
-    public function addTextInput(string $identifier, string $label = '', string $value = '', string $placeholder = '', string $pattern = ''): FormBuilder
+    public function addTextInput(string $identifier, string $label = '', string $value = '', string $placeholder = '', string $pattern = '', bool $required = false): FormBuilder
     {
         $input = "<div class='mb-3'>";
         if ($label !== '') {
@@ -41,12 +41,15 @@ class FormBuilder
         if ($pattern !== '') {
             $input .= " pattern='$pattern'";
         }
+        if ($required) {
+            $input .= " required";
+        }
         $input .= "></div>";
         $this->inputs .= $input;
         return $this;
     }
 
-    public function addEmailInput(string $identifier, string $label = '', string $value = '', string $placeholder = '', string $pattern = ''): FormBuilder
+    public function addEmailInput(string $identifier, string $label = '', string $value = '', string $placeholder = '', string $pattern = '', bool $required = false): FormBuilder
     {
         $input = "<div class='mb-3'>";
         if ($label !== '') {
@@ -64,23 +67,30 @@ class FormBuilder
         if ($pattern !== '') {
             $input .= " pattern='$pattern'";
         }
+        if ($required) {
+            $input .= " required";
+        }
         $input .= "></div>";
         $this->inputs .= $input;
         return $this;
     }
 
-    public function addPasswordInput(string $identifier, string $label = ''): FormBuilder
+    public function addPasswordInput(string $identifier, string $label = '', bool $required = false): FormBuilder
     {
         $input = "<div class='mb-3'>";
         if ($label !== '') {
             $input .= "<label class='form-label' for='$identifier'>$label</label>";
         }
-        $input .= "<input class='form-control' type='password' id='$identifier' name='$identifier'></div>";
+        $input .= "<input class='form-control' type='password' id='$identifier' name='$identifier'";
+        if ($required) {
+            $input .= " required";
+        }
+        $input .= "></div>";
         $this->inputs .= $input;
         return $this;
     }
 
-    public function addNumberInput(string $identifier, string $label = '', string $min = '', string $max = '', string $value = '', string $placeholder = ''): FormBuilder
+    public function addNumberInput(string $identifier, string $label = '', string $min = '', string $max = '', string $value = '', string $placeholder = '', bool $required = false): FormBuilder
     {
         $input = "<div class='mb-3'>";
         if ($label !== '') {
@@ -101,12 +111,15 @@ class FormBuilder
         if ($placeholder !== '') {
             $input .= " placeholder='$placeholder'";
         }
+        if ($required) {
+            $input .= " required";
+        }
         $input .= "></div>";
         $this->inputs .= $input;
         return $this;
     }
 
-    public function addDateInput(string $identifier, string $label = '', string $min = '', string $max = '', string $value = '', string $placeholder = '', string $pattern = ''): FormBuilder
+    public function addDateInput(string $identifier, string $label = '', string $min = '', string $max = '', string $value = '', string $placeholder = '', string $pattern = '', bool $required = false): FormBuilder
     {
         $input = "<div class='mb-3'>";
         if ($label !== '') {
@@ -130,6 +143,9 @@ class FormBuilder
         if ($pattern !== '') {
             $input .= " pattern='$pattern'";
         }
+        if ($required) {
+            $input .= " required";
+        }
         $input .= "></div>";
         $this->inputs .= $input;
         return $this;
@@ -138,15 +154,18 @@ class FormBuilder
     /**
      * @param array<string,string> $options
      */
-    public function addSelect(string $identifier, string $label, array $options): FormBuilder
+    public function addSelect(string $identifier, string $label, array $options, bool $required = false): FormBuilder
     {
         $input = "<div class='mb-3'>";
         if ($label !== '') {
             $input .= "<label class='form-label' for='$identifier'>$label</label>";
         }
 
-        $input .= "<select class='form-select' name='$identifier' id='$identifier'>";
-
+        $input .= "<select class='form-select' name='$identifier' id='$identifier'";
+        if ($required) {
+            $input .= " required";
+        }
+        $input .= "></div>";
         foreach ($options as $key => $value) {
             $input .= "<option value ='$value'>$key</option>";
         }

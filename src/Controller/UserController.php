@@ -18,7 +18,7 @@ class UserController extends AbstractController
         $this->userAccountRepository = new UserAccountRepository;
     }
 
-    public function createUser(): void
+    public function create(): void
     {
         $message = '';
 
@@ -49,6 +49,43 @@ class UserController extends AbstractController
                 'nav_off' => true,
             ]);
         }
+
+        $view->addCss(['bootstrap.min']);
+        $view->addJs(['bootstrap.min']);
+        $view->render();
+    }
+
+    public function update(): void
+    {
+        $message = '';
+        if (!Security::isConnected()) {
+            $this->redirectIndex();
+        }
+
+        if (isset($_POST['submit']) && $_POST['submit'] === 'updateUser') {
+            $message = FormValidator::validateUserUpdate();
+
+            if ($message === '') {
+                if ($_POST['new_password'] === '') {
+                    $password = $_POST['password'];
+                } else {
+                    $password = $_POST['new_password'];
+                }
+                $this->userAccountRepository->update($_SESSION['connected_user']->getId(), [
+                    'email' => $_POST['email'],
+                    'password' => password_hash($password, PASSWORD_DEFAULT),
+                    'firstName' => $_POST['firstName'],
+                    'lastName' => $_POST['lastName'],
+                ]);
+                Security::updateConnectedUser();
+                $message = "Votre compte a bien été modifié";
+            }
+        }
+
+        $view = new View('form', 'Modifiez votre compte', [
+            'form' => UserForm::createForm('update'),
+            'message' => $message,
+        ]);
 
         $view->addCss(['bootstrap.min']);
         $view->addJs(['bootstrap.min']);

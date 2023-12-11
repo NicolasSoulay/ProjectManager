@@ -21,6 +21,13 @@ class Security
         $_SESSION['connected_user'] = $user[0];
         return '';
     }
+
+    public static function updateConnectedUser(): void
+    {
+        $user = Model::getInstance()->getById('UserAccount', $_SESSION['connected_user']->getId());
+        $_SESSION['connected_user'] = $user[0];
+    }
+
     // TODO : refaire les methodes disconnect et isConnected
     public static function disconnect(): void
     {

@@ -8,8 +8,11 @@ abstract class Routes
     // '<url>' => ['controller_name', 'methode_name'],
     const ROUTES = [
         'Home' => ['ProjectController', 'index'],
-        'Project' => ['TaskController', 'index'],
+        'AccountCreation' => ['UserController', 'create'],
+        'User' => ['UserController', 'update'],
         'Disconnect' => ['UserController', 'disconnect'],
-        'AccountCreation' => ['UserController', 'createUser'],
+        'Project' => ['TaskController', 'index'],
+        'DeleteProject' => ['ProjectController', 'delete'],
+        'CreateProject' => ['ProjectController', 'create'],
     ];
 }

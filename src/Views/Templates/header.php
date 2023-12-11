@@ -8,19 +8,14 @@
                 </a>
             </div>
             <?php if (!(isset($nav_off) && $nav_off)) : ?>
-                <ul class='col navbar-nav justify-content-center'>
-                    <li class='nav-item'><a class='nav-link text-light' href=''>lien 1</a></li>
-                    <li class='nav-item'><a class='nav-link text-light' href=''>lien 2</a></li>
-                    <li class='nav-item'><a class='nav-link text-light' href=''>lien 3</a></li>
-                </ul>
                 <ul class='col navbar-nav justify-content-end'>
-                    <li class='nav-item'><a class='nav-link text-light' href=''>Votre compte</a></li>
+                    <li class='nav-item'><a class='nav-link text-light' href='?User'>Votre compte</a></li>
                     <li class='nav-item'><a class='me-3 nav-link text-light' href='?Disconnect'>Déconnexion</a></li>
                 </ul>
             <?php endif ?>
         </nav>
     </header>
-    <main class='container'>
+    <main class='container mb-5 pb-5'>
         <?php
         if (isset($message)) {
             echo "<div class='d-flex justify-content-center'><p class='h5 my-4 text-danger'>" . $message . "</p></div>";

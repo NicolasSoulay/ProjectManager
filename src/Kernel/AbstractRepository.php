@@ -60,4 +60,12 @@ class AbstractRepository
     {
         return Model::getInstance()->customQueryCount($sql);
     }
+
+    /**
+     * @param array<string,mixed> $datas
+     */
+    public function update(int $id, array $datas): Model
+    {
+        return Model::getInstance()->updateById($this->entity, $id, $datas);
+    }
 }

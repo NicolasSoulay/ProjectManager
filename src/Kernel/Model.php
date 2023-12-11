@@ -32,21 +32,24 @@ class Model extends PDO
 
     public function readAll(string $entity): array
     {
+        $class = Config::ENTITY . ucfirst($entity);
         $query = $this->query('select * from ' . $entity);
-        return $query->fetchAll(PDO::FETCH_CLASS, Config::ENTITY . ucfirst($entity));
+        return $query->fetchAll(PDO::FETCH_CLASS, $class);
     }
 
     public function getById(string $entity, int $id): array
     {
+        $class = Config::ENTITY . ucfirst($entity);
         $query = $this->query('select * from ' . $entity . ' where id=' . $id);
-        return $query->fetchAll(PDO::FETCH_CLASS, Config::ENTITY . ucfirst($entity));
+        return $query->fetchAll(PDO::FETCH_CLASS, $class);
     }
     /**
      * @param array<string,mixed> $attributes
      */
     public function getByAttribute(string $entity, array $attributes): array
     {
-        // SELECT * FROM table WHERE attribute = value
+        $class = Config::ENTITY . ucfirst($entity);
+
         $count = count($attributes) - 1;
         $i = 0;
         $sql = "SELECT * FROM $entity WHERE ";
@@ -59,7 +62,7 @@ class Model extends PDO
         }
         $query = $this->query($sql);
 
-        return $query->fetchAll(PDO::FETCH_CLASS, Config::ENTITY . ucfirst($entity));
+        return $query->fetchAll(PDO::FETCH_CLASS, $class);
     }
 
     /**
@@ -137,8 +140,9 @@ class Model extends PDO
 
     public function customQueryGet(string $sql, string $entity): array
     {
+        $class = Config::ENTITY . ucfirst($entity);
         $query = $this->query($sql);
-        return $query->fetchAll(PDO::FETCH_CLASS, Config::ENTITY . ucfirst($entity));
+        return $query->fetchAll(PDO::FETCH_CLASS, $class);
     }
 
     public function customQueryCount(string $sql): int
